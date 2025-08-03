@@ -1,0 +1,234 @@
+.development-process-section {
+  padding: 80px 0;
+  background: #f9fafb;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-header h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.section-header p {
+  font-size: 1.25rem;
+  color: #6b7280;
+  max-width: 768px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.process-steps-container {
+  position: relative;
+  padding-top: 20px; /* Space for the line to start above first item */
+  padding-bottom: 20px; /* Space for the line to end below last item */
+}
+
+/* Vertical Line */
+.process-steps-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #e9d5ff 0%, #fbcfe8 100%);
+  z-index: 0;
+  display: none; /* Hidden by default, shown on larger screens */
+}
+
+@media (min-width: 1024px) {
+  /* Equivalent to lg breakpoint */
+  .process-steps-container::before {
+    display: block;
+  }
+}
+
+.process-step-item {
+  display: flex;
+  flex-direction: column; /* Default for mobile: stack vertically */
+  align-items: center;
+  gap: 32px; /* Vertical gap for mobile */
+  margin-bottom: 48px; /* Spacing between steps */
+  position: relative;
+  z-index: 1; /* Ensure items are above the line */
+}
+
+/* Remove margin-bottom for the last item */
+.process-step-item:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .process-step-item {
+    flex-direction: row; /* Desktop default: card - icon - spacer */
+    justify-content: space-between; /* Pushes card/spacer to ends */
+    gap: 0; /* Remove internal gap, use margins for spacing around icon */
+    margin-bottom: 64px; /* More spacing for desktop */
+  }
+
+  .process-step-item.reverse {
+    flex-direction: row-reverse; /* Desktop reverse: spacer - icon - card */
+  }
+
+  .process-card-wrapper {
+    flex-basis: 45%; /* Take up less than half to leave space for icon and gap */
+    max-width: 45%; /* Control width */
+  }
+
+  .process-icon-circle {
+    flex-shrink: 0; /* Don't shrink icon */
+    margin: 0 32px; /* Space around icon */
+  }
+
+  .process-spacer {
+    flex-basis: 45%; /* Take up space on the other side */
+    max-width: 45%;
+    display: block; /* Make sure it's visible on desktop */
+  }
+}
+
+.process-card-wrapper {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  flex-grow: 1;
+  max-width: 100%; /* Default for mobile */
+}
+
+.process-card-wrapper:hover {
+  box-shadow: 0 20px 50px rgba(215, 174, 239, 0.4);
+  transform: translateY(-5px);
+}
+
+.process-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.process-step-number {
+  width: 32px;
+  height: 32px;
+  background: #ede9fe;
+  color: #7c3aed;
+  border-radius: 9999px;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  transition: all 0.3s ease;
+}
+
+.process-card-wrapper:hover .process-step-number {
+  background: #ddd6fe;
+}
+
+.process-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  transition: color 0.2s ease;
+}
+
+.process-card-wrapper:hover .process-card-title {
+  color: #7c3aed;
+}
+
+.process-card-description {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.process-icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  color: white;
+  z-index: 10;
+}
+
+.process-icon-circle:hover {
+  transform: scale(1.1);
+}
+
+.process-icon-circle svg {
+  width: 40px;
+  height: 40px;
+}
+
+.process-spacer {
+  flex-grow: 1;
+  max-width: 45%; /* Matches card width for alignment */
+  display: none; /* Hidden by default, shown on desktop */
+}
+
+/* Animations */
+.process-step-item.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px); /* Default initial state for fade-up */
+}
+
+@media (min-width: 1024px) {
+  .process-step-item.animate-on-scroll {
+    transform: translateX(-30px); /* Initial state for left-aligned */
+  }
+  .process-step-item.animate-on-scroll.reverse {
+    transform: translateX(30px); /* Initial state for right-aligned */
+  }
+}
+
+.process-step-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 1s ease-out forwards; /* Default fade-up for mobile */
+}
+
+@media (min-width: 1024px) {
+  .process-step-item.is-visible {
+    animation: fadeInLeft 1s ease-out forwards; /* Left-aligned animation */
+  }
+  .process-step-item.is-visible.reverse {
+    animation: fadeInRight 1s ease-out forwards; /* Right-aligned animation */
+  }
+}
+
+/* Bottom CTA */
+.process-bottom-cta {
+  text-align: center;
+  margin-top: 64px;
+}
+
+.process-cta-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ede9fe 0%, #fce7f3 100%);
+  color: #7c3aed;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.process-cta-content:hover {
+  transform: scale(1.02);
+}
+
+/* General container and button styles from globals.css are still active */
